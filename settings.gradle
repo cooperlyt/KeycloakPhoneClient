@@ -1,0 +1,4 @@
+include ':keycloak-client'
+include ':sample'
+include ':library-keycloak'
+rootProject.name = "KeycloakClient"

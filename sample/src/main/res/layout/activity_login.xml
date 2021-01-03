@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+  <data>
+
+  </data>
+
+
+  <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:paddingLeft="24dp"
+          android:paddingRight="24dp">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="122dp"
+            android:text="phone login"
+            android:textSize="19sp"/>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+      <EditText
+              android:id="@+id/phone_number"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:drawableStart="@drawable/user_ic_outline_smartphone_24"
+              android:focusable="true"
+              android:focusableInTouchMode="true"
+              android:gravity="center_vertical"
+              android:hint="input phone number please!"
+              android:inputType="phone"
+              android:maxLines="1"
+              android:paddingStart="24dp"
+              android:paddingEnd="0dp"
+              android:textSize="16sp"/>
+
+
+    </FrameLayout>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+      <EditText
+              android:id="@+id/auth_code"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:drawableStart="@drawable/user_ic_outline_lock_24"
+
+              android:focusable="true"
+              android:focusableInTouchMode="true"
+              android:gravity="center_vertical"
+              android:hint="code"
+              android:inputType="number"
+              android:maxLines="1"
+              android:paddingStart="24dp"
+              android:paddingEnd="0dp"
+
+              android:textSize="15sp"/>
+
+      <TextView
+              android:id="@+id/request_auth_code"
+              android:layout_width="72dp"
+              android:layout_height="23dp"
+              android:layout_gravity="end|center_vertical"
+              android:background="@drawable/user_bg_request_auth_code"
+              android:enabled="false"
+              android:gravity="center"
+              android:text="get code"
+              android:textSize="12sp"/>
+    </FrameLayout>
+
+
+
+
+    <FrameLayout android:layout_marginTop="40dp"
+                 android:layout_width="match_parent" android:layout_height="40dp">
+      <Button
+              android:id="@+id/login"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorAccent"
+              android:textStyle="bold"
+              android:text="login"
+              android:textSize="16sp"/>
+
+
+        <ProgressBar
+                android:id="@+id/login_progress"
+                android:layout_gravity="center"
+                android:paddingVertical="8dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                android:indeterminateTintMode="src_atop"
+                android:translationZ="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+
+
+
+  </LinearLayout>
+
+</layout>
