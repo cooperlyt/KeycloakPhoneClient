@@ -10,10 +10,10 @@ public class KeycloakClient {
 
   public static void init(KeycloakTokenStorage storage){
     accessTokenHolder = new KeycloakTokenHolder.Builder()
-            .host("www.litle.fun") // root address: like "www.XXX.com"
-            .realms("havechat")  // realms: config in your keycloak
-            .clientId("mobile") // clientId: config in your keycloak
-            .clientSecret("c0843a31-2309-452b-b1bf-1f4ebfcfcb54") //clientSecret : clientId: config in your keycloak
+            .host("www.XXX.com") // root address: like "www.XXX.com"
+            .realms("realms")  // realms: config in your keycloak
+            .clientId("client") // clientId: config in your keycloak
+            .clientSecret("XXXXX-XXXXX-XXXX-XXXX-1XXXXX") //clientSecret : clientId: config in your keycloak
             .storage(storage) // storage: you can custom for cc.coopersoft.accesstoken.keycloak.KeycloakTokenStorage
             .build();
   }
