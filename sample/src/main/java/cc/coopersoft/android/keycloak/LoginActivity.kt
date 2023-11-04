@@ -104,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
                     object : AuthenticationCallback {
                         override fun onFailure(error: ErrorResult) {
                             runOnUiThread {
-                                toast("login fail!")
+                                toast("login fail! ${error.error}")
                                 loading(false)
                             }
                         }
