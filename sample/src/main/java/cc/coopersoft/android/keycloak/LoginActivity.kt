@@ -7,6 +7,7 @@ import android.os.CountDownTimer
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
@@ -60,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
                         override fun onFailure(phoneNumber: String?, error: ErrorResult) {
                             runOnUiThread {
                                 binding?.requestAuthCode?.isEnabled = true
+                                error.error?.let { Log.e(TAG, it) }
                                 toast("send code fail!")
                             }
                         }
@@ -118,6 +120,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val TAG = "LoginActivity"
         @JvmStatic
         fun start(context: Context) {
             context.startActivity(Intent(context, LoginActivity::class.java))

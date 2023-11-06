@@ -7,6 +7,7 @@ import android.os.CountDownTimer
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                     object : CodeRequestCallback {
                         override fun onFailure(phoneNumber: String?, error: ErrorResult) {
                             binding?.requestAuthCode?.isEnabled = true
+                            error.error?.let { Log.e(TAG, it) }
                             runOnUiThread { toast("send code fail!") }
                         }
 
@@ -109,6 +111,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
+        const val TAG = "MainActivity"
         @JvmStatic
         fun start(context: Context) {
             context.startActivity(Intent(context, MainActivity::class.java))
