@@ -302,13 +302,16 @@ class KeycloakTokenHolder : PhoneSupportAccessTokenHolder {
         val myClientId = clientId ?: throw ExceptionInInitializerError("client id not set!")
         val myAccessTokenUrl = accessTokenUrl ?: throw ExceptionInInitializerError("accessTokenUrl not set!")
 
-        val formBody = FormBody.Builder()
-        formBody.add("client_id", myClientId)
-            .add("grant_type", "password")
-        credential?.context?.forEach(BiConsumer { k: String?, v: String? -> formBody.add(k, v) })
-        Optional.ofNullable(clientSecret)
-            .ifPresent { s: String? -> formBody.add("client_secret", s) }
-        Optional.ofNullable(scope).ifPresent { s: String? -> formBody.add("scope", scope) }
+        val formBody = FormBody.Builder().apply {
+            add("client_id", myClientId)
+            add("grant_type", "password")
+
+            credential?.context?.forEach(BiConsumer { k: String?, v: String? -> add(k, v) })
+
+            clientSecret?.let { add("client_secret", it) }
+            scope?.let { add("scope", it) }
+        }
+
         val request = Request.Builder()
             .addHeader("Content-Type", "application/x-www-form-urlencoded")
             .url(myAccessTokenUrl)
@@ -352,13 +355,15 @@ class KeycloakTokenHolder : PhoneSupportAccessTokenHolder {
         val myAccessTokenUrl = accessTokenUrl ?: throw ExceptionInInitializerError("accessTokenUrl not set!")
 
         Log.d("Keycloak", "refresh token for:$accessTokenUrl")
-        val formBody = FormBody.Builder()
-        formBody.add("client_id", myClientId)
-            .add("grant_type", "refresh_token")
-            .add("refresh_token", refreshToken)
-        Optional.ofNullable(clientSecret)
-            .ifPresent { s: String? -> formBody.add("client_secret", s) }
-        Optional.ofNullable(scope).ifPresent { s: String? -> formBody.add("scope", scope) }
+        val formBody = FormBody.Builder().apply {
+            add("client_id", myClientId)
+            add("grant_type", "refresh_token")
+            add("refresh_token", refreshToken ?: "")
+
+            clientSecret?.let { add("client_secret", it) }
+            scope?.let { add("scope", it) }
+        }
+
         val request = Request.Builder()
             .addHeader("Content-Type", "application/x-www-form-urlencoded")
             .url(myAccessTokenUrl)
