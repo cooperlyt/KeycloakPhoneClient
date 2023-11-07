@@ -9,12 +9,17 @@ android {
     defaultConfig {
         minSdkVersion ext_min_sdk
         targetSdkVersion ext_target_sdk
+        versionCode 10
+        versionName "0.1.0"
+
+        setProperty("archivesBaseName", "keycloak-client-$versionName")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
+        debug { debuggable true }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
