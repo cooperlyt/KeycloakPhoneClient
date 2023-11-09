@@ -1,33 +1,39 @@
 apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    namespace "cc.coopersoft"
+    compileSdk ext_target_sdk
+    buildToolsVersion ext_build_tools
 
     defaultConfig {
-        minSdkVersion 24
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion ext_min_sdk
+        targetSdkVersion ext_target_sdk
+        versionCode 10
+        versionName "0.1.0"
+
+        setProperty("archivesBaseName", "keycloak-client-$versionName")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
+        debug { debuggable true }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.core:core-ktx:+'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -36,7 +42,4 @@ dependencies {
 
     api 'com.squareup.okhttp3:okhttp:3.12.2'
     api 'com.google.code.gson:gson:2.8.6'
-
-    compileOnly 'org.projectlombok:lombok:1.18.16'
-    annotationProcessor 'org.projectlombok:lombok:1.18.16'
 }

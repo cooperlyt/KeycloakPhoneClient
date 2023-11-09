@@ -1,15 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    namespace "cc.coopersoft.android.keycloak"
+    compileSdk ext_target_sdk
+    buildToolsVersion ext_build_tools
 
     defaultConfig {
         applicationId "cc.coopersoft.android.keycloak"
-        minSdkVersion 24
-        targetSdkVersion 30
+        minSdkVersion ext_min_sdk
+        targetSdkVersion ext_target_sdk
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,12 +24,18 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     dataBinding{
         enabled = true
+    }
+
+    buildFeatures {
+        compose false
+        viewBinding true
+        buildConfig true
     }
 }
 
@@ -40,5 +48,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation project(':keycloak-client')
-
 }
