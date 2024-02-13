@@ -2,6 +2,7 @@ package cc.coopersoft.accesstoken.keycloak
 
 import android.util.Log
 import cc.coopersoft.accesstoken.api.Credential
+import cc.coopersoft.accesstoken.api.HasTokenResult
 import cc.coopersoft.accesstoken.api.PhoneSupportAccessTokenHolder
 import cc.coopersoft.accesstoken.api.callback.AuthenticationCallback
 import cc.coopersoft.accesstoken.api.callback.CodeRequestCallback
@@ -221,16 +222,27 @@ class KeycloakTokenHolder : PhoneSupportAccessTokenHolder {
             .flatMap { token: KeycloakTokenInfo -> validToken(token) }
             .map { t: KeycloakTokenInfo -> t.tokenType + " " + t.accessToken }
 
+    private fun checkToken(t: KeycloakTokenInfo): Boolean {
+        return isExpires(t.expiresIn, t.created) && isExpires(
+            t.refreshExpiresIn, t.created
+        )
+    }
+
     override fun hasToken(): Boolean {
         return getToken().map { t: KeycloakTokenInfo ->
-            val expires = isExpires(t.expiresIn, t.created) && isExpires(
-                t.refreshExpiresIn, t.created
-            )
+            val expires = checkToken(t)
             if (expires) {
                 clearToken()
             }
             !expires
         }.orElse(false)
+    }
+
+    override fun hasTokenWithResult(): HasTokenResult {
+        return getToken().map { t: KeycloakTokenInfo ->
+            val expires = checkToken(t)
+            HasTokenResult(!expires, expires)
+        }.orElse(HasTokenResult(hasToken = false, expired = false))
     }
 
     override fun clearToken() {

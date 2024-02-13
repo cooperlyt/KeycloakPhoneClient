@@ -8,5 +8,8 @@ interface AccessTokenHolder {
     fun refreshToken(): Optional<String>
     fun clearToken()
     fun hasToken(): Boolean
+    fun hasTokenWithResult(): HasTokenResult
     fun requireToken(credential: Credential?, callback: AuthenticationCallback?)
 }
+
+class HasTokenResult(val hasToken: Boolean, val expired: Boolean)

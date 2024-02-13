@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion ext_min_sdk
         targetSdkVersion ext_target_sdk
-        versionCode 10
-        versionName "0.1.0"
+        versionCode 11
+        versionName "0.1.1"
 
         setProperty("archivesBaseName", "keycloak-client-$versionName")
 
